@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, tornado</title>
+    <link rel="stylesheet" href="{{ static_url("style.css") }}"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <script src="{{ static_url("sevenSeg.js") }}"/></script>
+
+    <script>
+    //自動更新
+    setTimeout("location.reload()",1000*60);
+
+    //時刻データを取得して変数jikanに格納する
+    var jikan= new Date();
+
+    //時・分・秒を取得する
+    var hour = jikan.getHours();
+    var minute = jikan.getMinutes();
+    var second = jikan.getSeconds();
+
+    // var timeStr = hour+":"+minute+":"+second;
+    // document.write(hour+"時",+minute+"分"+second+"秒");
+    if (hour < 10){
+        hour = "0" + hour;
+    }
+    if (minute < 10){
+        minute = "0"+ minute;
+    }
+    </script>
+    {% from datetime import datetime %}
+
+   </head>
+<body>
+    <div id="container">
+      <div id="main">
+	      <p>7seg Clock</p>
+	      <!-- <p>{{datetime.now()}}</p> -->
+      </div>
+
+    </div>
+
+    <div id="timeClock"></div>
+
+    <script>
+        // $("#example1").sevenSeg({ value: 3 });
+         $("#timeClock").sevenSeg({
+        digits:4,
+        value:hour+"."+minute,
+        colorOff: "#002000",
+        colorOn: "Lime",
+        // slant: 10 //スタイル崩壊
+    });
+
+    console.log(hour+"."+minute);
+    </script>
+
+
+    </body>
+</html>
